@@ -1,0 +1,145 @@
+@import "./variable";
+@import "./reset";
+@import "./mixin";
+
+.sect {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template: 0.15fr 1fr / 0.575fr 0.425fr;
+
+    &Header {
+        padding: 0 20%;
+        display: flex;
+        align-items: center;
+    }
+    &Txt {
+        padding: 2em 20% 5em 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 500;
+            line-height: 1em;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: $darkGrayishRed;
+
+            span {
+                font-weight: 300;
+                color: $desaturatedRed;
+            }
+        }
+
+        p {
+            max-width: 50ch;
+            margin-top: 1.5rem;
+            line-height: 1.5em;
+            color: $desaturatedRed;
+        }
+    }
+
+    &Input {
+        margin-top: 1.5rem;
+        position: relative;
+
+        input {
+            width: 100%;
+            padding: 0.75em 9em 0.75em 1.5em;
+            font-size: 1rem;
+            border: 1px solid $darkGrayishRed;
+            outline: none;
+            border-radius: 2em;
+
+            &:invalid {
+                border: 2px solid $softRed;
+
+                & ~ .error,
+                & ~ p {
+                    display: block;
+                }
+            }
+        }
+
+        .error {
+            width: 1.25em;
+            height: 1.25em;
+            position: absolute;
+            top: 50%;
+            right: 6.75em;
+            transform: translateY(-50%);
+            display: none;
+        }
+
+        button {
+            width: 7em;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            background: linear-gradient(135deg, $linear2-1, $linear2-2);
+            border: none;
+            outline: none;
+            border-radius: 2em;
+            box-shadow: 0px 10px 10px rgba($desaturatedRed, 0.5);
+
+            &:hover {
+                background: linear-gradient(135deg, $linear1-1, $linear2-1);
+            }
+        }
+
+        p {
+            padding-left: 2em;
+            font-size: 0.8rem;
+            font-weight: 500;
+            position: absolute;
+            bottom: -1.75em;
+            display: none;
+        }
+    }
+
+    &Hero {
+        grid-row: span 2;
+        background-image: url("../images/hero-desktop.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        @include medium() {
+            background-image: url("../images/hero-mobile.jpg");
+            background-position: left top;
+        }
+    }
+
+    &Bg {
+        width: 57.5%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-image: url("../images/bg-pattern-desktop.svg");
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    @include medium() {
+        grid-template: 0.15fr 1fr 1fr / 1fr;
+
+        &Hero {
+            grid-row: span 1;
+        }
+    }
+
+    @include mobile() {
+        &Header {
+            padding: 0 10%;
+        }
+
+        &Txt {
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+    }
+}
